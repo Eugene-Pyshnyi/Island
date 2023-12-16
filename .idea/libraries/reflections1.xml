@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="reflections" type="repository">
+  <library name="reflections1" type="repository">
     <properties maven-id="org.reflections:reflections:0.10.2" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/reflections/reflections/0.10.2/reflections-0.10.2.jar!/" />

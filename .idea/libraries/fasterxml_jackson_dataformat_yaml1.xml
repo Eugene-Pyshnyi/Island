@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="fasterxml.jackson.dataformat.yaml" type="repository">
+  <library name="fasterxml.jackson.dataformat.yaml1" type="repository">
     <properties maven-id="com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.0" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.16.0/jackson-dataformat-yaml-2.16.0.jar!/" />

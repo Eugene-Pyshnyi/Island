@@ -7,11 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="....." />
+        <module name="Island" />
+        <module name="Island2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name=".idea" target="1.5" />
+      <module name="....." target="1.7" />
       <module name="com" target="17" />
     </bytecodeTargetLevel>
   </component>

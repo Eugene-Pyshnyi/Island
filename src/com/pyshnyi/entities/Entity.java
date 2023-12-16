@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public abstract class Entity {
     private double weight;
-    private int maxCountOnCell;
+    private int maxCount;
     private String unicode;
 }

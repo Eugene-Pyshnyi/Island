@@ -1,3 +1,9 @@
+Bear:
+  weight: 500
+  maxCount: 5
+  speed: 2
+  kgToBeFull: 80
+
 animals:
  - name: "bear"
    emoji: "🐻"

@@ -1,14 +1,16 @@
 package com.pyshnyi.entities.animals.predators;
 
+import com.pyshnyi.annotation.Entity;
 import com.pyshnyi.entities.animals.Animal;
 
-public class Wolf extends Predator {
-    public Wolf() {
-        super(1,1,1,1);
+@Entity(className = "wolf")
+public class Wolf extends Predator{
+    public Wolf(Double weight, Integer maxCount, Integer speed, Double kgToBeFull, String unicode) {
+        super(weight, maxCount, speed, kgToBeFull, unicode);
     }
 
     @Override
     public Animal reproduce() {
-        return new Wolf();
+        return null;
     }
 }

@@ -36,7 +36,7 @@ public class IslandMap {
 
                     var entityAsString = entity.getClass().getSimpleName();
                     var entityCountOnLocation = location[y][x].getEntitiesCount().getOrDefault(entityAsString, 0);
-                    if (entityCountOnLocation >= entity.getMaxCountOnCell()) {
+                    if (entityCountOnLocation >= entity.getMaxCount()) {
                         continue;
                     }
                     location[y][x].addEntity(entity);

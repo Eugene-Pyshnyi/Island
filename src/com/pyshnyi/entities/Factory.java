@@ -15,6 +15,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Factory {
     public static final String CURRENT_PATH = "com.pyshnyi.entities";
@@ -25,7 +26,7 @@ public class Factory {
     @SneakyThrows
     public void initEntitiesMap() {
         Properties properties = new Properties();
-        try (FileReader reader = new FileReader("src/com/pyshnyi/resource/animal-chars.yaml")) {
+        try (FileReader reader = new FileReader("src/com/pyshnyi/resource/animals-data.properties")) {
             properties.load(reader);
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,7 +37,8 @@ public class Factory {
             var entityAnnotation = aClass.getAnnotation(com.pyshnyi.annotation.Entity.class);
             String entityName = entityAnnotation.className();
             System.out.println(entityName);
-            Class parentClass = aClass.getSuperclass();
+            Class childClass = aClass.getSuperclass();
+            Class parentClass = childClass.getSuperclass();
             Field[] parentClassField = parentClass.getDeclaredFields();
             List<String> propertiesValues = new ArrayList<>();
             for (Field field : parentClassField) {
@@ -47,32 +49,38 @@ public class Factory {
                     propertiesValues.add(entityName + "." + propertyName);
                 }
             }
-            Constructor constructor = aClass.getDeclaredConstructor(Double.class, Integer.class, Integer.class, Double.class);
-            Double weight = Double.valueOf((String) properties.get(propertiesValues.get(0)));
-            Integer maxCountOnCell = Integer.valueOf((String) properties.get(propertiesValues.get(1)));
-            Integer speed = Integer.valueOf((String) properties.get(propertiesValues.get(2)));
-            Double kgToBeFull = Double.valueOf((String) properties.get(propertiesValues.get(3)));
-            entitiesMap.put(aClass.getClass(), constructor.newInstance(weight, maxCountOnCell, speed, kgToBeFull));
+            var valuesToSearch = propertiesValues.stream()
+                    .filter(el -> el.startsWith(entityName))
+                    .sorted()
+                    .collect(Collectors.toList());
+            Constructor constructor = aClass.getDeclaredConstructor(Double.class, Integer.class, Integer.class, Double.class, String.class);
+            Double weight = Double.valueOf((String) properties.get(valuesToSearch.get(4)));
+            Integer maxCount = Integer.valueOf((String) properties.get(valuesToSearch.get(1)));
+            Integer speed = Integer.valueOf((String) properties.get(valuesToSearch.get(2)));
+            Double kgToBeFull = Double.valueOf((String) properties.get(valuesToSearch.get(0)));
+            String unicode = String.valueOf(properties.get(valuesToSearch.get(3)));
+            entitiesMap.put(aClass, constructor.newInstance(weight, maxCount, speed, kgToBeFull, unicode));
         }
+        System.out.println();
     }
     public Entity createEntity(EntityType type) {
         return switch (type) {
             case BEAR -> (Bear) entitiesMap.get(Bear.class);
-            case BOAR -> new Boar();
-            case BUFFALO -> new Buffalo();
-            case CATERPILLAR -> new Caterpillar();
-            case DEER -> new Deer();
-            case DUCK -> new Duck();
-            case EAGLE -> new Eagle();
-            case FOX -> new Fox();
-            case GOAT -> new Goat();
-            case GRASS -> new Grass();
-            case HORSE -> new Horse();
-            case MOUSE -> new Mouse();
-            case RABBIT -> new Rabbit();
-            case SHEEP -> new Sheep();
-            case SNAKE -> new Snake();
-            case WOLF -> new Wolf();
+            case BOAR -> (Boar) entitiesMap.get(Boar.class);
+            case BUFFALO -> (Buffalo) entitiesMap.get(Buffalo.class);
+            case CATERPILLAR -> (Caterpillar) entitiesMap.get(Caterpillar.class);
+            case DEER -> (Deer) entitiesMap.get(Deer.class);
+            case DUCK -> (Duck) entitiesMap.get(Duck.class);
+            case EAGLE -> (Eagle) entitiesMap.get(Eagle.class);
+            case FOX -> (Fox) entitiesMap.get(Fox.class);
+            case GOAT -> (Goat) entitiesMap.get(Goat.class);
+            case GRASS -> (Grass) entitiesMap.get(Grass.class);
+            case HORSE -> (Horse) entitiesMap.get(Horse.class);
+            case MOUSE -> (Mouse) entitiesMap.get(Mouse.class);
+            case RABBIT -> (Rabbit) entitiesMap.get(Rabbit.class);
+            case SHEEP -> (Sheep) entitiesMap.get(Sheep.class);
+            case SNAKE -> (Snake) entitiesMap.get(Snake.class);
+            case WOLF -> (Wolf) entitiesMap.get(Wolf.class);
         };
     }
     @SneakyThrows

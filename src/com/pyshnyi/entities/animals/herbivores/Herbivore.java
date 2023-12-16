@@ -3,8 +3,11 @@ package com.pyshnyi.entities.animals.herbivores;
 import com.pyshnyi.entities.animals.Animal;
 
 public abstract class Herbivore extends Animal {
-    public Herbivore(double weight, int maxCountOnCell, int speed, double kgToBeFull) {
-        super(weight, maxCountOnCell, speed, kgToBeFull);
+    protected Herbivore(double weight, int maxCount, int speed, double kgToBeFull) {
+        super(weight, maxCount, speed, kgToBeFull);
     }
 
+    protected Herbivore(double weight, int maxCount, int speed, double kgToBeFull, String unicode) {
+        super(weight, maxCount, speed, kgToBeFull, unicode);
+    }
 }

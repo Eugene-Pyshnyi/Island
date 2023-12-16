@@ -1,0 +1,95 @@
+animals:
+ - name: "bear"
+   emoji: "🐻"
+   weight: 500
+   maxCount: 5
+   cellSpeed: 2
+   kgToBeFull: 80
+ - name: "boar"
+   emoji: "🐗"
+   weight: 400
+   maxCount: 50
+   cellSpeed: 2
+   kgToBeFull: 50
+ - name: "buffalo"
+   emoji: "🐃"
+   weight: 700
+   maxCount: 10
+   cellSpeed: 3
+   kgToBeFull: 100
+ - name: "caterpillar"
+   emoji: "🐛"
+   weight: 0.01
+   maxCount: 1000
+   cellSpeed: 0
+   kgToBeFull: 0
+ - name: "deer"
+   emoji: "🦌"
+   weight: 6
+   maxCount: 20
+   cellSpeed: 4
+   kgToBeFull: 50
+ - name: "duck"
+   emoji: "🦆"
+   weight: 1
+   maxCount: 200
+   cellSpeed: 4
+   kgToBeFull: 0.15
+ - name: "eagle"
+   emoji: "🦅"
+   weight: 6
+   maxCount: 20
+   cellSpeed: 3
+   kgToBeFull: 1
+ - name: "fox"
+   emoji: "🦊"
+   weight: 8
+   maxCount: 30
+   cellSpeed: 2
+   kgToBeFull: 2
+ - name: "goat"
+   emoji: "🐐"
+   weight: 60
+   maxCount: 140
+   cellSpeed: 3
+   kgToBeFull: 15
+ - name: "grass"
+   emoji: "🌿"
+   weight: 1
+   maxCount: 200
+ - name: "horse"
+   emoji: "🐎"
+   weight: 400
+   maxCount: 20
+   cellSpeed: 4
+   kgToBeFull: 60
+ - name: "mouse"
+   emoji: "🐁"
+   weight: 0.05
+   maxCount: 500
+   cellSpeed: 1
+   kgToBeFull: 0.01
+ - name: "rabbit"
+   emoji: "🐇"
+   weight: 2
+   maxCount: 150
+   cellSpeed: 2
+   kgToBeFull: 0.45
+ - name: "sheep"
+   emoji: "🐑"
+   weight: 70
+   maxCount: 140
+   cellSpeed: 3
+   kgToBeFull: 15
+ - name: "snake"
+   emoji: "🐍"
+   weight: 15
+   maxCount: 40
+   cellSpeed: 1
+   kgToBeFull: 3
+ - name: "wolf"
+   emoji: "🐺"
+   weight: 50
+   maxCount: 30
+   cellSpeed: 3
+   kgToBeFull: 8

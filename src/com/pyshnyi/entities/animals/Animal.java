@@ -14,6 +14,9 @@ import java.util.concurrent.ThreadLocalRandom;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Animal extends Entity {
+
+    private final int MAX_ACTION_CHANCE_INDEX = 100;
+
     @Prop(title = "weight", priority = 4)
     private double weight;
     @Prop(title = "maxCount", priority = 1)
@@ -74,5 +77,16 @@ public abstract class Animal extends Entity {
     }
     public Direction move() {
         return Direction.values()[ThreadLocalRandom.current().nextInt(Direction.values().length)];
+    }
+    public Action actionChoice() {
+        Action action = Action.values()[ThreadLocalRandom.current().nextInt(Action.values().length)];
+        boolean isActiveAction = ThreadLocalRandom.current().nextInt(MAX_ACTION_CHANCE_INDEX) < action.getActionChance();
+        if (isActiveAction) {
+            return action;
+        }
+        return action.SLEEP;
+    }
+    public boolean isDead() {
+        return true;
     }
 }

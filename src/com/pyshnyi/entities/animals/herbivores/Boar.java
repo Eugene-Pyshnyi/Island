@@ -10,9 +10,13 @@ public class Boar extends Herbivore {
         super(weight, maxCount, speed, kgToBeFull, unicode);
     }
 
+    public Boar() {
+        super(400, 50, 2, 50);
+    }
+
     @Override
     public Animal reproduce() {
-        return null;
+        return new Boar();
     }
 
 }

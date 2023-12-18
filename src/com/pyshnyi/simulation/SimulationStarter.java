@@ -1,13 +1,16 @@
 package com.pyshnyi.simulation;
 
+import com.pyshnyi.entities.Factory;
 import com.pyshnyi.entities.animals.Action;
 import com.pyshnyi.entities.animals.Animal;
 import com.pyshnyi.entities.animals.Direction;
+import com.pyshnyi.entities.animals.Eating;
 import com.pyshnyi.island.IslandControl;
 import com.pyshnyi.island.IslandMap;
 import com.pyshnyi.dialog.UserDialog;
 import com.pyshnyi.island.Location;
 import com.pyshnyi.island.service.StepService;
+import com.pyshnyi.island.service.Steps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SimulationStarter {
     private Location location;
     private IslandMap islandMap;
-    private final StepService service;
+    private final Steps service;
     private final SimulationSettings settings;
     private final UserDialog userDialog;
     private final IslandControl controller;
@@ -56,15 +59,15 @@ public class SimulationStarter {
 
     private void doAction(Action action, Animal animal, Location location) {
         switch (action) {
-//            case EAT -> doEat(animal, location);
+          //  case EAT -> doEat(animal, location);
             case MOVE -> doMove(animal, location);
-//            case REPRODUCE -> doReproduce(animal, location);
-//            case SLEEP -> doSleep(animal, location);
+            case REPRODUCE -> doReproduce(animal, location);
+          //  case SLEEP -> doSleep(animal, location);
         }
         reduceHealth(animal);
     }
 
-    private void doMove(Animal animal, Location location) {
+    private void doMove(Animal animal) {
         Direction direction = animal.move();
     }
 
@@ -75,8 +78,7 @@ public class SimulationStarter {
         }
         animal.setHealth(health);
     }
-
-    public void doMove(Animal animal) {
+    public void doMove(Animal animal, Location location) {
         int stepCount = ThreadLocalRandom.current().nextInt(animal.getSpeed() + 1);
 
         while (stepCount > 0) {
@@ -88,6 +90,21 @@ public class SimulationStarter {
                 case RIGHT -> location = service.stepRight(animal, location, islandMap);
             }
             stepCount--;
+        }
+    }
+    public void doReproduce(Animal animal, Location location) {
+        String animalAsString = animal.getClass().getSimpleName();
+        if (location.getEntitiesCount().get(animalAsString) >= animal.getMaxCount()) {
+            return;
+        }
+        List<Animal> animals = location.getAnimals();
+
+        var sameAnimalType = animals.stream()
+                .filter(animalType -> animalType.getClass().getSimpleName().equals(animal.getClass().getSimpleName()))
+                .count();
+        if (sameAnimalType > 1) {
+            Animal newAnimal = animal.reproduce();
+            location.addEntity(newAnimal);
         }
     }
 }

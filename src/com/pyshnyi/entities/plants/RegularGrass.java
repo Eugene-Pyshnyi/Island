@@ -1,6 +1,9 @@
 package com.pyshnyi.entities.plants;
 
 import com.pyshnyi.annotation.Entity;
+import com.pyshnyi.entities.animals.Animal;
+import com.pyshnyi.entities.animals.herbivores.Herbivore;
+import com.pyshnyi.entities.animals.predators.Snake;
 
 @Entity(className = "regular_grass")
 public class RegularGrass extends Grass {
@@ -8,8 +11,7 @@ public class RegularGrass extends Grass {
         super(weight, maxCount, speed, kgToBeFull, unicode);
     }
 
-    @Override
-    public Plant reproduce() {
-        return null;
+    public RegularGrass() {
+        super(1, 200, 0, 0);
     }
 }

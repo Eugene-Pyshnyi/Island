@@ -7,9 +7,12 @@ public class Deer extends Herbivore {
     public Deer(Double weight, Integer maxCount, Integer speed, Double kgToBeFull, String unicode) {
         super(weight, maxCount, speed, kgToBeFull, unicode);
     }
+    public Deer() {
+        super(6, 20, 4, 50);
+    }
 
     @Override
     public Animal reproduce() {
-        return null;
+        return new Deer();
     }
 }

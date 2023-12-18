@@ -50,5 +50,4 @@ public abstract class Plant extends Entity {
     public int getMaxCount() {
         return maxCount;
     }
-    public abstract Plant reproduce();
 }

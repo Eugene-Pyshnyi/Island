@@ -4,9 +4,13 @@ import com.pyshnyi.entities.animals.Action;
 import com.pyshnyi.entities.animals.Animal;
 import com.pyshnyi.entities.animals.Direction;
 import com.pyshnyi.entities.animals.Eating;
+import com.pyshnyi.island.service.StepService;
+import com.pyshnyi.simulation.SimulationStarter;
 import lombok.Getter;
 import lombok.Setter;
 import com.pyshnyi.simulation.SimulationSettings;
+
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
@@ -16,6 +20,7 @@ public class IslandControl {
     private final Eating eating;
     private final SimulationSettings simulationSettings;
     private Location location;
+    private IslandMap islandMap;
 
     public IslandControl(IslandMap map, Eating eating, SimulationSettings simulationSettings) {
         this.map = map;

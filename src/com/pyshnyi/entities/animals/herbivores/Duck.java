@@ -7,9 +7,12 @@ public class Duck extends Herbivore {
     public Duck(Double weight, Integer maxCount, Integer speed, Double kgToBeFull, String unicode) {
         super(weight, maxCount, speed, kgToBeFull, unicode);
     }
+    public Duck() {
+        super(1, 200, 4, 0.15);
+    }
 
     @Override
     public Animal reproduce() {
-        return null;
+        return new Duck();
     }
 }

@@ -1,7 +1,5 @@
 package com.pyshnyi.entities.plants;
 
-import com.pyshnyi.entities.animals.Animal;
-
 
 public abstract class Grass extends Plant {
     protected Grass(double weight, int maxCount, int speed, int kgToBeFull) {

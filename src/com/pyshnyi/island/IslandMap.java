@@ -79,14 +79,14 @@ public class IslandMap {
         return true;
     }
 
-//    public void initializePlants() {
-//        for (int y = 0; y < height; y++) {
-//            for (int x = 0; x < width; x++) {
-//                Plant initialPlant = newPlant();
-//                location[y][x].addPlant(initialPlant);
-//            }
-//        }
-//    }
+    public void initializePlants() {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Plant initialPlant = newPlant();
+                location[y][x].addPlant(initialPlant);
+            }
+        }
+    }
     private Plant newPlant() {
         return new RegularGrass();
     }

@@ -9,17 +9,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 @Getter
 public class Location {
     private int x;
     private int y;
     private List<Entity> entities;
+    private List<Plant> plants;
     private Map<String, Integer> entitiesCount;
 
     public Location(int x, int y) {
         this.x = x;
         this.y = y;
         this.entities = new ArrayList<>();
+        this.plants = new ArrayList<>();
         this.entitiesCount = new HashMap<>();
     }
     public void addEntity(Entity entity) {
@@ -30,17 +34,20 @@ public class Location {
         entities.remove(entity);
         removeFromStatistic(entity);
     }
-    public List<Animal> getAnimals() {
+    public List<Animal> getEntities() {
         return entities.stream()
                 .filter(entity -> entity instanceof Animal)
                 .map(entity -> (Animal) entity)
-                .toList();
+                .collect(Collectors.toList());
     }
     public List<Plant> getPlants() {
         return entities.stream()
                 .filter(entity -> entity instanceof Plant)
                 .map(entity -> (Plant) entity)
-                .toList();
+                .collect(Collectors.toList());
+    }
+    public void addPlant(Plant plant) {
+        plants.add(plant);
     }
     private void addToStatistic(Entity entity) {
         var entityAsString = getEntityName(entity);

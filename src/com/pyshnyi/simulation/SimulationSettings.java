@@ -11,9 +11,9 @@ public class SimulationSettings {
 
     private int heightMap = 20;
 
-    private int maxCountOnCell = 100;
+    private int maxCountOnCell = 50;
 
-    private int lifeCycles = 100;
+    private int lifeCycles = 15;
 
-    private double reduceHealthPercent = 40;
+    private double reduceHealthPercent = 1;
 }

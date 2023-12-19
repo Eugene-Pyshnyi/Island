@@ -1,4 +1,4 @@
-chanceToEat:
+eatableIndexes:
   Bear:
     Boar: 50
     Buffalo: 20

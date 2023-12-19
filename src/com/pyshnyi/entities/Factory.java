@@ -1,5 +1,7 @@
 package com.pyshnyi.entities;
 
+import com.pyshnyi.entities.animals.Animal;
+import com.pyshnyi.entities.plants.Plant;
 import com.pyshnyi.entities.plants.RegularGrass;
 import lombok.SneakyThrows;
 import org.reflections.Reflections;
@@ -40,13 +42,21 @@ public class Factory {
                     .filter(el -> el.startsWith(entityName))
                     .sorted()
                     .toList();
-            var constructor = aClass.getDeclaredConstructor(Double.class, Integer.class, Integer.class, Double.class, String.class);
-            Double weight = Double.valueOf((String) properties.get(valuesToSearch.get(4)));
-            Integer maxCount = Integer.valueOf((String) properties.get(valuesToSearch.get(1)));
-            Integer speed = Integer.valueOf((String) properties.get(valuesToSearch.get(2)));
-            Double kgToBeFull = Double.valueOf((String) properties.get(valuesToSearch.get(0)));
-            String unicode = String.valueOf(properties.get(valuesToSearch.get(3)));
-            entitiesMap.put(aClass, constructor.newInstance(weight, maxCount, speed, kgToBeFull, unicode));
+            if (Plant.class.isAssignableFrom(aClass)) {
+                var constructor = aClass.getDeclaredConstructor(Double.class, Integer.class, String.class);
+                Double weight = Double.valueOf((String) properties.get(valuesToSearch.get(2)));
+                Integer maxCount = Integer.valueOf((String) properties.get(valuesToSearch.get(0)));
+                String unicode = String.valueOf(properties.get(valuesToSearch.get(1)));
+                entitiesMap.put(aClass, constructor.newInstance(weight, maxCount, unicode));
+            } else if (Animal.class.isAssignableFrom(aClass)) {
+                var constructor = aClass.getDeclaredConstructor(Double.class, Integer.class, Integer.class, Double.class, String.class);
+                Double weight = Double.valueOf((String) properties.get(valuesToSearch.get(4)));
+                Integer maxCount = Integer.valueOf((String) properties.get(valuesToSearch.get(1)));
+                Integer speed = Integer.valueOf((String) properties.get(valuesToSearch.get(2)));
+                Double kgToBeFull = Double.valueOf((String) properties.get(valuesToSearch.get(0)));
+                String unicode = String.valueOf(properties.get(valuesToSearch.get(3)));
+                entitiesMap.put(aClass, constructor.newInstance(weight, maxCount, speed, kgToBeFull, unicode));
+            }
         }
         System.out.println(entitiesMap);
     }
@@ -77,10 +87,10 @@ public class Factory {
             case EAGLE -> (Eagle) entitiesMap.get(Eagle.class);
             case FOX -> (Fox) entitiesMap.get(Fox.class);
             case GOAT -> (Goat) entitiesMap.get(Goat.class);
-            case REGULAR_GRASS -> (RegularGrass) entitiesMap.get(RegularGrass.class);
             case HORSE -> (Horse) entitiesMap.get(Horse.class);
             case MOUSE -> (Mouse) entitiesMap.get(Mouse.class);
             case RABBIT -> (Rabbit) entitiesMap.get(Rabbit.class);
+            case REGULAR_GRASS -> (RegularGrass) entitiesMap.get(RegularGrass.class);
             case SHEEP -> (Sheep) entitiesMap.get(Sheep.class);
             case SNAKE -> (Snake) entitiesMap.get(Snake.class);
             case WOLF -> (Wolf) entitiesMap.get(Wolf.class);

@@ -18,5 +18,4 @@ public class Boar extends Herbivore {
     public Animal reproduce() {
         return new Boar();
     }
-
 }

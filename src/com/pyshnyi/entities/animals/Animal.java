@@ -1,11 +1,11 @@
 package com.pyshnyi.entities.animals;
 
+import com.pyshnyi.entities.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.pyshnyi.annotation.Prop;
-import com.pyshnyi.entities.Entity;
 
 import java.util.concurrent.ThreadLocalRandom;
 

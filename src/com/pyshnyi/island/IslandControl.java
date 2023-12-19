@@ -1,41 +1,36 @@
 package com.pyshnyi.island;
 
-import com.pyshnyi.entities.animals.Action;
 import com.pyshnyi.entities.animals.Animal;
-import com.pyshnyi.entities.animals.Direction;
-import com.pyshnyi.entities.animals.Eating;
-import com.pyshnyi.island.service.StepService;
-import com.pyshnyi.simulation.SimulationStarter;
 import lombok.Getter;
 import lombok.Setter;
 import com.pyshnyi.simulation.SimulationSettings;
 
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 @Setter
 public class IslandControl {
     private final IslandMap map;
-    private final Eating eating;
-    private final SimulationSettings simulationSettings;
+    private final SimulationSettings settings;
     private Location location;
     private IslandMap islandMap;
 
-    public IslandControl(IslandMap map, Eating eating, SimulationSettings simulationSettings) {
+    public IslandControl(IslandMap map, SimulationSettings simulationSettings) {
         this.map = map;
-        this.eating = eating;
-        this.simulationSettings = simulationSettings;
+        this.settings = simulationSettings;
     }
     private boolean isDead(Animal animal) {
         return animal.getHealth() < 0;
     }
-
-    private void reduceHealth(Animal animal) {
-        double health = animal.getHealth() - ((animal.getKgToBeFull() * simulationSettings.getReduceHealthPercent()) / 100);
+    public void increaseHealth(Animal animal) {
+        double health = animal.getHealth() + ((animal.getKgToBeFull()) * settings.getReduceHealthPercent()) / 100;
         if (health > animal.getHealth()) {
             health = animal.getKgToBeFull();
         }
+        animal.setHealth(health);
+    }
+
+    private void reduceHealth(Animal animal) {
+        double health = animal.getHealth() - ((animal.getKgToBeFull() * settings.getReduceHealthPercent()) / 100);
         animal.setHealth(health);
     }
 }

@@ -41,6 +41,7 @@ public class StepService implements Steps {
 
     private boolean canStep(Animal animal, Location location) {
         String animalAsString = animal.getClass().getSimpleName();
-        return location.getEntitiesCount().get(animalAsString) >= animal.getMaxCount();
+        Integer entityCount = location.getEntitiesCount().get(animalAsString);
+        return entityCount != null && entityCount >= animal.getMaxCount();
     }
 }

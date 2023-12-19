@@ -18,10 +18,10 @@ public enum EntityType {
     EAGLE(Eagle.class),
     FOX(Fox.class),
     GOAT(Goat.class),
-    REGULAR_GRASS(RegularGrass.class),
     HORSE(Horse.class),
     MOUSE(Mouse.class),
     RABBIT(Rabbit.class),
+    REGULAR_GRASS(RegularGrass.class),
     SHEEP(Sheep.class),
     SNAKE(Snake.class),
     WOLF(Wolf.class);

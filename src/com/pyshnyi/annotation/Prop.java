@@ -9,6 +9,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Prop {
     String title();
+
     String defaultValue() default "";
+
     int priority();
 }

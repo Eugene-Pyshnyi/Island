@@ -8,7 +8,6 @@ import com.pyshnyi.entities.animals.Animal;
 import com.pyshnyi.entities.animals.Direction;
 import com.pyshnyi.island.IslandControl;
 import com.pyshnyi.island.IslandMap;
-import com.pyshnyi.dialog.UserDialog;
 import com.pyshnyi.island.Location;
 import com.pyshnyi.island.service.*;
 
@@ -24,14 +23,12 @@ public class SimulationStarter {
     private final int MAX_EATABLE_INDEX = 100;
     private final Steps service;
     private final SimulationSettings settings;
-    private final UserDialog userDialog;
     private final IslandControl controller;
     private final StatisticsPrinter statisticsPrinter;
 
     public SimulationStarter() {
         this.service = new StepService();
         this.settings = new SimulationSettings();
-        this.userDialog = new UserDialog(settings);
         this.islandMap = new IslandMap(settings.getHeightMap(), settings.getWidthMap());
         this.controller = new IslandControl(islandMap, settings);
         this.statisticsPrinter = new StatisticsPrinter();
@@ -83,6 +80,7 @@ public class SimulationStarter {
         }
         animal.setHealth(health);
     }
+
     public void doMove(Animal animal, Location location) {
         int stepCount = ThreadLocalRandom.current().nextInt(animal.getSpeed() + 1);
 
@@ -97,6 +95,7 @@ public class SimulationStarter {
             stepCount--;
         }
     }
+
     public void doReproduce(Animal animal, Location location) {
         String animalAsString = animal.getClass().getSimpleName();
         Integer count = location.getEntitiesCount().get(animalAsString);
@@ -114,6 +113,7 @@ public class SimulationStarter {
             location.addEntity(newAnimal);
         }
     }
+
     public void doEat(Animal animal, Location location) {
         List<Entity> food = location
                 .getEntities()
@@ -128,16 +128,20 @@ public class SimulationStarter {
             }
         }
     }
+
     private boolean isSameEntity(Animal animal, Entity entity) {
         return entity.getClass().getSimpleName().equals(animal.getClass().getSimpleName());
     }
+
     public void doSleep(Animal animal) {
         controller.increaseHealth(animal);
     }
+
     private boolean isEaten(Animal hungryAnimal, Entity foodEntity) {
         int probabilityOfEating = getEatableChance(hungryAnimal, foodEntity);
         return ThreadLocalRandom.current().nextInt(MAX_EATABLE_INDEX) < probabilityOfEating;
     }
+
     private EatingMap initEatingChance() {
         ObjectMapper mapper = new YAMLMapper();
         EatingMap eatingMap = null;
@@ -148,15 +152,15 @@ public class SimulationStarter {
         }
         return eatingMap;
     }
+
     private Integer getEatableChance(Animal hungryAnimal, Entity foodEntity) {
         Map<String, Integer> map = eatingMap.getEatableIndexes().get(hungryAnimal.getClass().getSimpleName());
 
-        // Проверяем, что map не равен null и содержит ключ foodEntity.getClass().getSimpleName()
         if (map != null) {
             Integer value = map.get(foodEntity.getClass().getSimpleName());
-            return value != null ? value : 0; // Если значение есть, возвращаем его, иначе 0
+            return value != null ? value : 0;
         } else {
-            return 0; // Если ключ отсутствует, возвращаем значение по умолчанию (0)
+            return 0;
         }
     }
 }

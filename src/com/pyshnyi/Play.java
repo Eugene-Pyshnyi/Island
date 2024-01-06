@@ -1,13 +1,12 @@
 package com.pyshnyi;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.pyshnyi.island.service.YamlReader;
 import com.pyshnyi.simulation.SimulationStarter;
 
-@Getter
-@Setter
 public class Play {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception {
+        YamlReader yamlReader = new YamlReader();
+        yamlReader.read(yamlReader.getYamlFilePath());
         SimulationStarter simulationStarter = new SimulationStarter();
         simulationStarter.start();
     }

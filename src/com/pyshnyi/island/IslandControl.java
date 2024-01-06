@@ -18,9 +18,11 @@ public class IslandControl {
         this.map = map;
         this.settings = simulationSettings;
     }
+
     private boolean isDead(Animal animal) {
         return animal.getHealth() < 0;
     }
+
     public void increaseHealth(Animal animal) {
         double health = animal.getHealth() + ((animal.getKgToBeFull()) * settings.getReduceHealthPercent()) / 100;
         if (health > animal.getHealth()) {

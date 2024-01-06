@@ -17,21 +17,24 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Factory {
-    private static final String CURRENT_PATH = "com.pyshnyi.entities";
+    private static final String filePath = "src/com/pyshnyi/resource/entities-data.properties";
+    public static final String CURRENT_PATH = "com.pyshnyi.entities";
     private Map<Class, Object> entitiesMap = new HashMap<>();
+
     public Factory() {
         initEntitiesMap();
     }
+
     @SneakyThrows
     public void initEntitiesMap() {
         Properties properties = new Properties();
-        FileReader reader = new FileReader("src/com/pyshnyi/resource/entities-data.properties");
-            properties.load(reader);
+        FileReader reader = new FileReader(filePath);
+        properties.load(reader);
 
         Set<Class<?>> allClassesFromMyPackage = findAllClassesUsingClassLoader();
         for (Class<?> aClass : allClassesFromMyPackage) {
@@ -97,6 +100,7 @@ public class Factory {
             case WOLF -> (Wolf) entitiesMap.get(Wolf.class);
         };
     }
+
     @SneakyThrows
     private Set<Class<?>> findAllClassesUsingClassLoader() {
         Class<? extends Annotation> annotationClass = com.pyshnyi.annotation.Entity.class;
@@ -106,6 +110,7 @@ public class Factory {
                         .filterInputsBy(new FilterBuilder().includePackage(CURRENT_PATH)));
         return reflections.getTypesAnnotatedWith(annotationClass);
     }
+
     private Class getClass(String className, String packageName) {
         try {
             return Class.forName(packageName + "/" + className.substring(0, className.lastIndexOf('.')));

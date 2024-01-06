@@ -1,14 +1,15 @@
 package com.pyshnyi.island.service;
 
+import lombok.Getter;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Map;
-
+@Getter
 public class YamlReader {
-    public static void main(String[] args) throws Exception {
-        String yamlFilePath = "com/pyshnyi/resource/chance-to-eat.yaml";
+    private final String yamlFilePath = "com/pyshnyi/resource/chance-to-eat.yaml";
+    public static void read(String yamlFilePath) throws Exception {
 
         try (InputStream input = new FileInputStream(yamlFilePath)) {
             Yaml yaml = new Yaml();

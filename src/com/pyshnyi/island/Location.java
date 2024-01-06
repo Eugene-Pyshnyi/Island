@@ -26,33 +26,40 @@ public class Location {
         this.plants = new ArrayList<>();
         this.entitiesCount = new HashMap<>();
     }
+
     public void addEntity(Entity entity) {
         entities.add(entity);
         addToStatistic(entity);
     }
+
     public void removeEntity(Entity entity) {
         entities.remove(entity);
         removeFromStatistic(entity);
     }
+
     public List<Animal> getEntities() {
         return entities.stream()
                 .filter(entity -> entity instanceof Animal)
                 .map(entity -> (Animal) entity)
                 .collect(Collectors.toList());
     }
+
     public List<Plant> getPlants() {
         return entities.stream()
                 .filter(entity -> entity instanceof Plant)
                 .map(entity -> (Plant) entity)
                 .collect(Collectors.toList());
     }
+
     public void addPlant(Plant plant) {
         plants.add(plant);
     }
+
     private void addToStatistic(Entity entity) {
         var entityAsString = getEntityName(entity);
         entitiesCount.merge(entityAsString, 1, (oldValue, newValue) -> oldValue + 1);
     }
+
     private void removeFromStatistic(Entity entity) {
         var entityAsString = getEntityName(entity);
         entitiesCount.merge(entityAsString, 1, (oldValue, newValue) -> {
@@ -63,6 +70,7 @@ public class Location {
             return newCount;
         });
     }
+
     private String getEntityName(Entity entity) {
         return entity.getClass().getSimpleName();
     }

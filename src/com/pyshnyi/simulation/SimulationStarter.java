@@ -80,6 +80,7 @@ public class SimulationStarter {
         }
         animal.setHealth(health);
     }
+
     public void doMove(Animal animal, Location location) {
         int stepCount = ThreadLocalRandom.current().nextInt(animal.getSpeed() + 1);
 
@@ -94,6 +95,7 @@ public class SimulationStarter {
             stepCount--;
         }
     }
+
     public void doReproduce(Animal animal, Location location) {
         String animalAsString = animal.getClass().getSimpleName();
         Integer count = location.getEntitiesCount().get(animalAsString);
@@ -111,6 +113,7 @@ public class SimulationStarter {
             location.addEntity(newAnimal);
         }
     }
+
     public void doEat(Animal animal, Location location) {
         List<Entity> food = location
                 .getEntities()
@@ -125,16 +128,20 @@ public class SimulationStarter {
             }
         }
     }
+
     private boolean isSameEntity(Animal animal, Entity entity) {
         return entity.getClass().getSimpleName().equals(animal.getClass().getSimpleName());
     }
+
     public void doSleep(Animal animal) {
         controller.increaseHealth(animal);
     }
+
     private boolean isEaten(Animal hungryAnimal, Entity foodEntity) {
         int probabilityOfEating = getEatableChance(hungryAnimal, foodEntity);
         return ThreadLocalRandom.current().nextInt(MAX_EATABLE_INDEX) < probabilityOfEating;
     }
+
     private EatingMap initEatingChance() {
         ObjectMapper mapper = new YAMLMapper();
         EatingMap eatingMap = null;
@@ -145,6 +152,7 @@ public class SimulationStarter {
         }
         return eatingMap;
     }
+
     private Integer getEatableChance(Animal hungryAnimal, Entity foodEntity) {
         Map<String, Integer> map = eatingMap.getEatableIndexes().get(hungryAnimal.getClass().getSimpleName());
 

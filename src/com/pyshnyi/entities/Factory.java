@@ -12,13 +12,17 @@ import com.pyshnyi.entities.animals.herbivores.*;
 import com.pyshnyi.entities.animals.predators.*;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Factory {
-    public static final String CURRENT_PATH = "com.pyshnyi.entities";
+    private static final String CURRENT_PATH = "com.pyshnyi.entities";
     private Map<Class, Object> entitiesMap = new HashMap<>();
     public Factory() {
         initEntitiesMap();
@@ -26,11 +30,8 @@ public class Factory {
     @SneakyThrows
     public void initEntitiesMap() {
         Properties properties = new Properties();
-        try (FileReader reader = new FileReader("src/com/pyshnyi/resource/entities-data.properties")) {
+        FileReader reader = new FileReader("src/com/pyshnyi/resource/entities-data.properties");
             properties.load(reader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         Set<Class<?>> allClassesFromMyPackage = findAllClassesUsingClassLoader();
         for (Class<?> aClass : allClassesFromMyPackage) {
